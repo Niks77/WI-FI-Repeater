@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Switch
+        android:id="@+id/wifiSwitch"
+        android:layout_width="319dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="72dp"
+        android:text="Enable WifiDirect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/autoConButton"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Enable Auto Connection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifiSwitch" />
+
+    <Switch
+        android:id="@+id/proxyButton"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Enable HTTPS Proxy"
+        android:thumbTint="#4CAF50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoConButton" />
+
+    <Switch
+        android:id="@+id/socks5Switch"
+        android:layout_width="319dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Enable Socks5 Proxy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/proxyButton" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="319dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="32dp"
+        android:text="Hello World!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/socks5Switch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
