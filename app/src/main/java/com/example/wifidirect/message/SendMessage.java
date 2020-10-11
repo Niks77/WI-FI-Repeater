@@ -33,6 +33,6 @@ public class SendMessage {
         }
     }
     public boolean isValidVersion(){
-        return version==Socks5Request.VERSION_SOCKS5;
+        return version==Socks5Request.VERSION_SOCKS5 || version==Socks5Command.VERSION_SOCKS4;
     }
 }

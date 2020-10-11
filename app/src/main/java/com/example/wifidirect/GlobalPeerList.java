@@ -3,7 +3,10 @@ package com.example.wifidirect;
 import android.util.Log;
 
 import com.example.wifidirect.model.ConnectedDeviceList;
+import com.example.wifidirect.util.AddressUtils;
 
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,11 +14,19 @@ public class GlobalPeerList {
     private static final String TAG = "GlobalPeerList";
     private static ArrayList<ConnectedDeviceList> peerList;
     private static HashMap<String,String> peersAddress = new HashMap<>();
-    public static boolean checkPeers(String peerAddress) {
-        Log.d(TAG, "checkPeers: " + peerAddress);
-        String fix = peerAddress.substring(1);
-        Log.d(TAG, "checkPeers: " + fix);
-        if(peersAddress.containsKey(fix)){
+    public static boolean checkPeers(String address) {
+        Log.d(TAG, "checkPeers: " + address);
+        if(address.charAt(0) == '/') {
+            address = address.substring(1);
+        }
+        if(peersAddress.containsKey(address)){
+            return true;
+        }
+        return false;
+    }
+    public static boolean checkPeers(InetSocketAddress address){
+        String strAddress = AddressUtils.InetSocketAddressToString(address);
+        if(peersAddress.containsKey(strAddress)){
             return true;
         }
         return false;

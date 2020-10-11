@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static com.example.wifidirect.util.Socks5Util.readLine;
 
@@ -131,7 +132,7 @@ public class Socks5Command {
                 Log.d(TAG, "read: length " + domainLength);
                 byte[] addressDomain = Socks5Util.read(inputStream,domainLength);
                 Log.e(TAG, "read: length" );
-                host = new String(addressDomain, Charset.forName("UTF-8"));
+                host = new String(addressDomain, StandardCharsets.UTF_8);
                 try {
                     inetAddress = InetAddress.getByName(host);
                 }catch (UnknownHostException e){

@@ -17,8 +17,8 @@ public class Socks5Executor implements Runnable {
     public void run() {
         while(true){
             try {
-                pool.execute(new Socks5Proxy(serverSocket.accept()));
-                //Socks5Proxy proxy = new Socks5Proxy(this.serverSocket.accept());
+               // pool.execute(new Socks5Proxy(serverSocket.accept()));
+                Socks5Proxy proxy = new Socks5Proxy(this.serverSocket.accept());
                 //proxy.start();
             } catch (IOException e) {
                 e.printStackTrace();

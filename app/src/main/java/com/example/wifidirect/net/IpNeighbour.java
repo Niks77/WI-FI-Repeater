@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.wifidirect.GlobalPeerList;
 import com.example.wifidirect.model.ConnectedDeviceList;
+import com.example.wifidirect.util.AddressUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,8 +40,10 @@ public class IpNeighbour extends  Thread{
         assert process != null;
         InputStream is = process.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        ConnectedDeviceList dummyList = new ConnectedDeviceList();
 
         result = new ArrayList<>();
+        result.add(dummyList);
         String line;
         try {
             while ((line = reader.readLine()) != null) {
@@ -52,11 +55,27 @@ public class IpNeighbour extends  Thread{
                     list.setWifiCard(chunk[2]);
                     list.setStatus(chunk[5]);
                     if (list.getAddress().startsWith("192.168.49") && list.getStatus().equals("REACHABLE")) {
-                        result.add(list);
-                        GlobalPeerList.setPeerAddress(chunk[0]);
+                        ConnectedDeviceList deviceList = null;
+//                        boolean contain = false;
+//                        for(ConnectedDeviceList deviceListIterator : GlobalPeerList.getPeerList()){
+//                            if(deviceListIterator.getAddress().equals(list.getAddress())){
+//                                deviceList = deviceListIterator;
+//                                contain = true;
+//                                break;
+//                            }
+//                        }
+//                        if (contain) {
+//                            deviceList.setWifiCard(list.getWifiCard());
+//                            deviceList.setStatus(list.getStatus());
+//                        }
+//                        else{
+                            result.add(list);
+//                        }
+//
                     }
+                    GlobalPeerList.setPeerAddress(chunk[0]);
                 }
-             }
+            }
         } catch (IOException e) {
             e.printStackTrace();
             }

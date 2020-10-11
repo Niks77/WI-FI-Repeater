@@ -4,9 +4,11 @@ public class ConnectedDeviceList {
     private String address;
     private String wifiCard;
     private String status;
-    private long bytes;
+    private long prevBytes=0;
+    private long nextBytes=0;
+    private long totalBytes=0;
     private String speed;
-    private String totalSize;
+
 
     public String getAddress() {
         return address;
@@ -32,12 +34,29 @@ public class ConnectedDeviceList {
         this.status = status;
     }
 
-    public long getBytes() {
-        return bytes;
+
+    public long getPrevBytes() {
+        return prevBytes;
     }
 
-    public void setBytes(long bytes) {
-        this.bytes = bytes;
+    public void setPrevBytes(long prevBytes) {
+        this.prevBytes = prevBytes;
+    }
+
+    public long getNextBytes() {
+        return nextBytes;
+    }
+
+    public void setNextBytes(long nextBytes) {
+        this.nextBytes = nextBytes;
+    }
+
+    public long getTotalBytes() {
+        return totalBytes;
+    }
+
+    public void setTotalBytes(long totalBytes) {
+        this.totalBytes += totalBytes;
     }
 
     public String getSpeed() {
@@ -48,11 +67,4 @@ public class ConnectedDeviceList {
         this.speed = speed;
     }
 
-    public String getTotalSize() {
-        return totalSize;
-    }
-
-    public void setTotalSize(String totalSize) {
-        this.totalSize = totalSize;
-    }
 }

@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 
+import com.example.wifidirect.model.ConnectedDeviceList;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -53,4 +55,5 @@ public class GlobalNotificationsBuilder {
         notificationManager.notify(Notification_id,notification);
 
     }
+
 }
