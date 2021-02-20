@@ -22,12 +22,10 @@ public class UDPRelay extends Thread {
     boolean running;
     int bufferSize = 1024*64;
     boolean i = true;
-    CountDownLatch latch;
-    public UDPRelay(InetAddress  inetAddress, int port, CountDownLatch latch) {
+    public UDPRelay(InetAddress  inetAddress, int port) {
         Log.d(TAG, "UDPRelay: ");
         this.inetAddress = inetAddress;
-        this.port = port;
-        this.latch=latch;
+       // this.port = port;
     }
 
     public InetAddress getInetAddress() {
@@ -67,7 +65,7 @@ public class UDPRelay extends Thread {
         running = true;
         socket = new DatagramSocket();
         SocketAddress address =  socket.getLocalSocketAddress();
-        socket.setSoTimeout(1024*60*5);
+        socket.setSoTimeout(1000*30);
         start();
         return address;
     }
@@ -83,10 +81,7 @@ public class UDPRelay extends Thread {
                 socket.receive(packet);
                 Log.d(TAG, "run: after packet");
                 Log.d(TAG, "run: client ip :" + packet.getAddress() +" client port :" + packet.getPort());
-                if(packet.getOffset() > 0){
-                    running=false;
-                    continue;
-                }
+
                 Socks5DatagramPacketModifier datagramPacketModifier = new Socks5DatagramPacketModifier();
                 if(isFromClient(packet)){
                     port1 = packet.getPort();
@@ -101,22 +96,31 @@ public class UDPRelay extends Thread {
                 }
             }
 
-        } catch (IOException e) {
+        }catch (SocketException e){
+            running = false;
+            socket.close();
+        }
+        catch (IOException e) {
+            running = false;
+            socket.close();
             e.printStackTrace();
-        } catch (Exception e) {
+        }  catch (Exception e) {
+            running = false;
+            socket.close();
             e.printStackTrace();
         }
-        latch.countDown();
     }
-    public void stopServer(){
-        if(isRunning()){
-            running=false;
-        }
-        socket.close();
-    }
-    private boolean isFromClient(DatagramPacket packet){
 
-     return GlobalPeerList.checkPeers(packet.getAddress().toString());
+
+
+
+    private boolean isFromClient(DatagramPacket packet){
+        Log.d(TAG, "isFromClient: "+ packet.getAddress().getHostAddress() + "  " + this.inetAddress.getHostAddress());
+        if(packet.getAddress().getHostAddress().equals(this.inetAddress.getHostAddress())){
+
+            return true;
+        }
+     return false;
 
    }
 }

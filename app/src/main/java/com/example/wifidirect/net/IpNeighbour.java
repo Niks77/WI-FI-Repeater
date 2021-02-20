@@ -51,7 +51,7 @@ public class IpNeighbour extends  Thread{
                     list.setAddress(chunk[0]);
                     list.setWifiCard(chunk[2]);
                     list.setStatus(chunk[5]);
-                    if (list.getAddress().startsWith("192.168.49") && list.getStatus().equals("REACHABLE")) {
+                    if (list.getAddress().startsWith("192.168.4") && list.getStatus().equals("REACHABLE")) {
                         result.add(list);
                         GlobalPeerList.setPeerAddress(chunk[0]);
                     }
