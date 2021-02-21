@@ -3,6 +3,7 @@ package com.example.wifidirect.io;
 import android.util.Log;
 
 import com.example.wifidirect.GlobalPeerList;
+import com.example.wifidirect.util.AddressUtils;
 import com.example.wifidirect.util.Socks5DatagramPacketModifier;
 
 import java.io.IOException;
@@ -22,12 +23,12 @@ public class UDPRelay extends Thread {
     boolean running;
     int bufferSize = 1024*64;
     boolean i = true;
-    CountDownLatch latch;
-    public UDPRelay(InetAddress  inetAddress, int port, CountDownLatch latch) {
+
+    public UDPRelay(InetAddress  inetAddress, int port) {
         Log.d(TAG, "UDPRelay: ");
         this.inetAddress = inetAddress;
         this.port = port;
-        this.latch=latch;
+
     }
 
     public InetAddress getInetAddress() {
@@ -67,7 +68,7 @@ public class UDPRelay extends Thread {
         running = true;
         socket = new DatagramSocket();
         SocketAddress address =  socket.getLocalSocketAddress();
-        socket.setSoTimeout(1024*60*5);
+        socket.setSoTimeout(1000*15);
         start();
         return address;
     }
@@ -106,7 +107,6 @@ public class UDPRelay extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        latch.countDown();
     }
     public void stopServer(){
         if(isRunning()){
@@ -115,8 +115,6 @@ public class UDPRelay extends Thread {
         socket.close();
     }
     private boolean isFromClient(DatagramPacket packet){
-
-     return GlobalPeerList.checkPeers(packet.getAddress().toString());
-
+     return this.inetAddress.getHostAddress().equals(packet.getAddress().getHostAddress());
    }
 }

@@ -80,9 +80,8 @@ public class Socks5Proxy extends Thread{
 
     private void udpConnect(Socks5Command socks5Command) throws IOException, InterruptedException {
         Log.d(TAG, "udpConnect: ");
-        CountDownLatch latch = new CountDownLatch(2);
         UDPRelay udpRelay = new UDPRelay(((InetSocketAddress)clientProxy.getRemoteSocketAddress()).getAddress(),
-                socks5Command.getPort(),latch);
+                socks5Command.getPort());
 
         OutputStream outputStream = clientProxy.getOutputStream();
         InetSocketAddress address = (InetSocketAddress) udpRelay.startServer();
@@ -92,7 +91,6 @@ public class Socks5Proxy extends Thread{
                ip , socks5Command.getAddressType(), address.getPort(), Socks5Reply.REQUEST_GRANTED);
         Log.d(TAG, "udpConnect: + send response");
         response.send(outputStream);
-        latch.await();
         udpRelay.stopServer();
         clientProxy.close();
 

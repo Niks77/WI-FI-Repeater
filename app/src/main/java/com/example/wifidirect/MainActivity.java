@@ -10,6 +10,8 @@ import android.content.Context;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import android.util.Log;
 
 import android.view.MenuItem;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private final Fragment homeFragment = new HomeFragment();
     private final Fragment clientFragment= new ClientFragment();
-    private final Fragment settingFragment = new SettingFragment();
+    //private final Fragment settingFragment = new SettingFragment();
     private  Fragment active = homeFragment;
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private Context context = this;
@@ -104,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.container,clientFragment).commit();
                     return true;
                 case R.id.navigation_server:
-                    fragmentManager.beginTransaction().replace(R.id.container,settingFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.container,new SettingFragment()).commit();
+                    //getFragmentManager().beginTransaction().replace(R.id.container,new SettingFragment()).commit();
                     return true;
             }
             return false;

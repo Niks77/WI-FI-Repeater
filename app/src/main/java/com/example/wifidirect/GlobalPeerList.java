@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class GlobalPeerList {
     private static final String TAG = "GlobalPeerList";
-    private static ArrayList<ConnectedDeviceList> peerList;
+    private static ArrayList<ConnectedDeviceList> peerList = new ArrayList<>();
     private static HashMap<String,String> peersAddress = new HashMap<>();
     public static boolean checkPeers(String address) {
         Log.d(TAG, "checkPeers: " + address);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="1080"
+        android:key="pref_http_port"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Enter Http Port Number to Listen. (Default:1080)"
+        android:title="Http Port" />
+    <EditTextPreference
+        android:defaultValue="1083"
+        android:key="pref_socks_port"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Enter Socks Port Number to Listen. (Default:1083)"
+        android:title="Socks5 Port" />
+</PreferenceScreen>
